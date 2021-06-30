@@ -1,4 +1,3 @@
-from logging import debug
 from website import create_app
 
 # Create app
