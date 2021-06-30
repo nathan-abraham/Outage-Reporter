@@ -1,0 +1,9 @@
+.heading {
+	text-align: center;
+	padding: 20px;
+}
+
+#map {
+	width: 80%;
+	height: 400px;
+}
