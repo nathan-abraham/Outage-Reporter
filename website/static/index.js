@@ -21,3 +21,14 @@ findForm.addEventListener("submit", (event) => {
     findForm.classList.add("was-validated");
   }
 });
+
+function findReport(zipCode, city) {
+  // Send POST request to URL endpoint
+  fetch("/find-submit", {
+    method: "POST",
+    body: JSON.stringify({zipCode: zipCode, city: city}),
+  }).then((_res) => {
+    // Reload window on resolution
+    window.location.href = "/find"
+  })
+}

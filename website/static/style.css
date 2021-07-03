@@ -1,9 +1,17 @@
+body {
+  background: aliceblue;
+}
+
 .heading {
   text-align: center;
   padding: 20px;
 }
 
-#map {
-  width: 80%;
-  height: 400px;
+.form-container {
+  padding: 20px;
+  background: white;
+}
+
+#mapID { 
+  height: 500px; 
 }
