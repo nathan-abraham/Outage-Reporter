@@ -1,3 +1,4 @@
 key.txt
 website/database.db
 website/test.py
+website/__pycache__
