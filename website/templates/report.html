@@ -3,11 +3,11 @@ block content%}
 <h1 class="heading">Report an Outage</h1>
 
 <div class="form-container">
-  <!-- Being form -->
+  <!-- Begin form -->
   <form method="POST" class="needs-validation" id="reportForm" novalidate>
-    <div class="row form-group">
+    <div class="row form-group required">
       <div class="col-3">
-        <label for="streetNum">Street #</label>
+        <label for="streetNum" class="control-label">Street #</label>
         <input
           type="text"
           name="streetNum"
@@ -16,21 +16,21 @@ block content%}
         />
       </div>
       <div class="col-6">
-        <label for="streetName">Street Name</label>
+        <label for="streetName" class="control-label">Street Name</label>
         <input type="text" name="streetName" class="form-control" required />
       </div>
       <div class="col-3">
-        <label for="unitNum">Unit or Suite #</label>
+        <label for="unitNum">Unit/Suite #</label>
         <input type="text" name="unitNum" class="form-control" />
       </div>
     </div>
-    <div class="row form-group">
+    <div class="row form-group required">
       <div class="col-7">
-        <label for="city">City</label>
+        <label for="city" class="control-label">City</label>
         <input type="text" name="city" class="form-control" required />
       </div>
       <div class="col-2">
-        <label for="state">State</label>
+        <label for="state" class="control-label">State</label>
         <select
           name="state"
           id="state"
@@ -92,7 +92,7 @@ block content%}
         </select>
       </div>
       <div class="col-3">
-        <label for="zipCode">Zip Code</label>
+        <label for="zipCode" class="control-label">Zip Code</label>
         <input type="text" name="zipCode" class="form-control" required />
       </div>
     </div>

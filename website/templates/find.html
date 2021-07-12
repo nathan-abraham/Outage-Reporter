@@ -1,4 +1,5 @@
 {% extends "base.html" %} 
+
 {% block style%}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -9,6 +10,7 @@
 {% endblock %}
 
 {% block title %}Find Outages in Your Area{% endblock %} 
+
 {% block content%}
 <h1 class="heading">Find Outages in Your Area</h1>
 
@@ -29,8 +31,9 @@
     <button type="submit" class="btn btn-outline-primary">Submit</button>
   </form>
 </div>
-<!-- Show reports -->
-{% if reports != None %}
+<!-- Show reports if there are reports to show -->
+{% if not_empty %}
+  <h2 class="heading">Reported Outages in Your Area</h2>
   <div class="container">
     <table class="table">
     <thead>
@@ -53,9 +56,13 @@
   </div>
 {% endif %}
 <br />
+{% if not_empty %}
 <div id="mapID"></div>
 <script>
+  // Create map
   const mymap = L.map('mapID').setView([51.505, -0.09], 13);
+
+  // Add tile layer to map
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -64,7 +71,27 @@
     zoomOffset: -1,
     accessToken: {{ key|safe }}
 }).addTo(mymap);
+
+// Intialize variables for latitude and longitude
+var lat = 0;
+var lon = 0;
 </script>
+{% for report in reports %}
+{% if report.latitude != None and report.longitude != None %}
+<script>
+  // Get latitude and longitude
+  lat = {{ report.latitude|tojson }}
+  lon = {{ report.longitude|tojson }}
+
+  // Create marker with coordinates
+  L.marker([lat, lon]).addTo(mymap);
+
+  // Pan to coordinates
+  mymap.panTo(new L.LatLng(lat, lon));
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
 <!-- <script
 	type="text/javascript"
 	src="{{ url_for('static', filename='map.js') }}"

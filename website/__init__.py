@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 
-# Google maps API key
+# Leaflet JS API key
 MAPS_API_KEY = ""
 DB_NAME = "database.db"
 db = SQLAlchemy()

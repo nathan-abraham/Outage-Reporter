@@ -1,6 +1,6 @@
 import json
 from flask import Blueprint, render_template, request, redirect, flash, jsonify
-from .models import Report
+from .models import Report, InvalidAddressError
 from . import MAPS_API_KEY, db, reports
 
 # Initialize blueprint
@@ -26,6 +26,8 @@ def report():
             db.session.add(new_report) 
             db.session.commit()
             flash("Form submitted succesfully.", category="success")
+        except InvalidAddressError:
+            flash("Invalid Address. Please try again.", category="error") 
         except:
             flash("There was a problem in submitting the form.", category="error")
 
@@ -38,8 +40,9 @@ def report():
 @views.route("/find", methods=["GET", "POST"])
 def find():
     global reports
-    # Render HTML template
-    return render_template("find.html", key=json.dumps(MAPS_API_KEY), reports=reports)
+    # Check if reports is emtpy and render HTML template
+    not_empty = reports != None and len(reports) > 0
+    return render_template("find.html", key=json.dumps(MAPS_API_KEY), reports=reports, not_empty=not_empty)
 
 
 @views.route("/find-submit", methods=["GET", "POST"])
@@ -61,7 +64,9 @@ def find_submit():
             return redirect("/find")
 
         # Get matching zip codes
-        reports = Report.query.filter_by(zip_code=zip_code).all()
+        reports = Report.query.filter_by(city=city).all()
+        if not reports:
+            flash("No outages found at this location.", category="error")
         # reports = Report.query.all()
         print(f"Previous reports: {reports}")
 

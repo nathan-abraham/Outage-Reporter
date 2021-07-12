@@ -15,3 +15,10 @@ body {
 #mapID { 
   height: 500px; 
 }
+
+.form-group.required .control-label:after { 
+  color: #d00;
+  content: "*";
+  position: absolute;
+  margin-left: 4px;
+}
