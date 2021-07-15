@@ -1,7 +1,7 @@
 import json
 from flask import Blueprint, render_template, request, redirect, flash, jsonify
 from .models import Report, InvalidAddressError
-from . import MAPS_API_KEY, db, reports
+from . import MAPS_API_KEY, db, reports, find_form_submitted
 
 # Initialize blueprint
 views = Blueprint("views", __name__)
@@ -10,6 +10,7 @@ views = Blueprint("views", __name__)
 @views.route("/", methods=["GET", "POST"])
 def report():
     # Handle post requests
+    find_form_submitted = False
     if request.method == "POST":
         # Get form data
         street_num = request.form.get("streetNum")
@@ -42,12 +43,12 @@ def find():
     global reports
     # Check if reports is emtpy and render HTML template
     not_empty = reports != None and len(reports) > 0
-    return render_template("find.html", key=json.dumps(MAPS_API_KEY), reports=reports, not_empty=not_empty)
+    return render_template("find.html", key=json.dumps(MAPS_API_KEY), reports=reports, not_empty=not_empty, form_submitted=find_form_submitted)
 
 
 @views.route("/find-submit", methods=["GET", "POST"])
 def find_submit():
-    global reports
+    global reports, find_form_submitted
 
     # Handle post requests
     if request.method == "POST":
@@ -58,6 +59,7 @@ def find_submit():
 
             # Show success message
             flash("Form submitted succesfully", category="success")
+            find_form_submitted = True
         except:
             # Show error message
             flash("There was a problem in submitting the form.", category="error")

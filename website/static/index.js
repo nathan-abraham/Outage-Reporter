@@ -2,6 +2,15 @@
 const reportForm = document.getElementById("reportForm");
 const findForm = document.getElementById("findForm");
 
+const detailsTextArea = document.getElementById("detailsTextArea")
+
+// Change textarea height based on screen size
+if (detailsTextArea != null) {
+  if ($(window).height() < 576)
+    detailsTextArea.rows = 3;
+}
+
+
 if (reportForm != null) {
   // Check if the form entries are valid and cancel the request if not
   reportForm.addEventListener("submit", (event) => {
@@ -11,16 +20,24 @@ if (reportForm != null) {
       reportForm.classList.add("was-validated");
     }
   });
+
+  // Space out columns
+  const formColumns = document.querySelectorAll("[data-column]");
+  formColumns.forEach((column) => {
+    column.classList.add("form-group");
+  });
 }
 
 // Check if the form entries are valid and cancel the request if not
-findForm.addEventListener("submit", (event) => {
-  if (!findForm.checkValidity()) {
-    event.preventDefault();
-    event.stopPropagation();
-    findForm.classList.add("was-validated");
-  }
-});
+if (findForm != null) {
+  findForm.addEventListener("submit", (event) => {
+    if (!findForm.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      findForm.classList.add("was-validated");
+    }
+  });
+}
 
 function findReport(zipCode, city) {
   // Send POST request to URL endpoint

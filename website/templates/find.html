@@ -31,8 +31,9 @@
     <button type="submit" class="btn btn-outline-primary">Submit</button>
   </form>
 </div>
+
 <!-- Show reports if there are reports to show -->
-{% if not_empty %}
+{% if not_empty and form_submitted %}
   <h2 class="heading">Reported Outages in Your Area</h2>
   <div class="container">
     <table class="table">
@@ -54,9 +55,11 @@
     </tbody>
   </table>
   </div>
+
+
 {% endif %}
 <br />
-{% if not_empty %}
+{% if not_empty and form_submitted %}
 <div id="mapID"></div>
 <script>
   // Create map
@@ -92,8 +95,5 @@ var lon = 0;
 {% endif %}
 {% endfor %}
 {% endif %}
-<!-- <script
-	type="text/javascript"
-	src="{{ url_for('static', filename='map.js') }}"
-></script> -->
+<div class="buffer"></div>
 {% endblock %}

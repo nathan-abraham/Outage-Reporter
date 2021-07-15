@@ -6,7 +6,7 @@ block content%}
   <!-- Begin form -->
   <form method="POST" class="needs-validation" id="reportForm" novalidate>
     <div class="row form-group required">
-      <div class="col-3">
+      <div class="form-group col-md-3" data-column>
         <label for="streetNum" class="control-label">Street #</label>
         <input
           type="text"
@@ -15,21 +15,21 @@ block content%}
           required
         />
       </div>
-      <div class="col-6">
+      <div class="col-md-6" data-column>
         <label for="streetName" class="control-label">Street Name</label>
         <input type="text" name="streetName" class="form-control" required />
       </div>
-      <div class="col-3">
+      <div class="col-md-3" data-column>
         <label for="unitNum">Unit/Suite #</label>
         <input type="text" name="unitNum" class="form-control" />
       </div>
     </div>
     <div class="row form-group required">
-      <div class="col-7">
+      <div class="col-md-7" data-column>
         <label for="city" class="control-label">City</label>
         <input type="text" name="city" class="form-control" required />
       </div>
-      <div class="col-2">
+      <div class="col-md-2" data-column>
         <label for="state" class="control-label">State</label>
         <select
           name="state"
@@ -91,15 +91,15 @@ block content%}
           <option value="WY">Wyoming</option>
         </select>
       </div>
-      <div class="col-3">
+      <div class="col-md-3" data-column>
         <label for="zipCode" class="control-label">Zip Code</label>
         <input type="text" name="zipCode" class="form-control" required />
       </div>
     </div>
-    <div class="row form-group">
+    <div class="row form-group" data-column>
       <div class="col">
         <label for="details">Details</label>
-        <input type="text" name="details" class="form-control" />
+        <textarea name="details" class="form-control" id="detailsTextArea" rows=4></textarea>
       </div>
     </div>
     <br />

@@ -1,15 +1,40 @@
-body {
-  background: aliceblue;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
+
+body { 
+  /* background-color: aliceblue; */
+  font-family: 'Montserrat', sans-serif !important;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url("images/background.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /* color: white; */
+}
+
+.nav-item-white {
+  color: white !important;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.nav-item-white:hover {
+  background-color: #fff !important;
+  color: #000 !important;
+  transition: 0.6s ease;
 }
 
 .heading {
   text-align: center;
   padding: 20px;
+  color: white;
 }
+
 
 .form-container {
   padding: 20px;
   background: white;
+  border: 1px solid transparent;
+  border-radius: 10px;
 }
 
 #mapID { 
@@ -21,4 +46,12 @@ body {
   content: "*";
   position: absolute;
   margin-left: 4px;
+}
+
+.table {
+  color: white;
+}
+
+.buffer {
+  height: 150px;
 }

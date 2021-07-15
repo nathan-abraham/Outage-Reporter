@@ -7,6 +7,7 @@ MAPS_API_KEY = ""
 DB_NAME = "database.db"
 db = SQLAlchemy()
 reports = None
+find_form_submitted = False
 
 
 def create_app():
