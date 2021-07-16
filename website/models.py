@@ -43,3 +43,15 @@ class Report(db.Model):
 	# String representation of object for debugging purposes
 	def __repr__(self):
 		return f"City: {self.city}, Zip Code: {self.zip_code}, Date: {self.date_created}, Details: {self.details}"
+
+class BareReport(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	city = db.Column(db.String(20))
+	latitude = db.Column(db.Float)
+	longitude = db.Column(db.Float)
+
+	def __init__(self, city, lat, lon):
+		self.city = city
+		self.latitude = lat
+		self.longitude = lon
+	

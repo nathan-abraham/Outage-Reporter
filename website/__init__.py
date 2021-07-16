@@ -8,6 +8,7 @@ DB_NAME = "database.db"
 db = SQLAlchemy()
 reports = None
 find_form_submitted = False
+closest_report = None
 
 
 def create_app():
