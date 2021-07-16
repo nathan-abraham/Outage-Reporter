@@ -17,6 +17,7 @@ def report():
     global find_form_submitted
 
     find_form_submitted = False
+    closest_report = None
 
     if request.method == "POST":
         # Get form data
@@ -51,7 +52,7 @@ def report():
 
 @views.route("/find", methods=["GET", "POST"])
 def find():
-    global reports
+    global reports, closest_report
     # Check if reports is emtpy and render HTML template
     not_empty = reports != None and len(reports) > 0
     return render_template("find.html", key=json.dumps(MAPS_API_KEY), reports=reports, not_empty=not_empty, form_submitted=find_form_submitted, closest_report=closest_report)
@@ -96,16 +97,18 @@ def find_submit():
             return redirect("/find")
 
         temp_distance = float("inf")
-        for report in reports:
+        for report in Report.query.all():
             if report.latitude is None or report.longitude is None:
                 continue
             curr_loc = report.latitude, report.longitude
             if geodesic(form_coor, curr_loc).miles < temp_distance:
                 closest_report = BareReport(city, report.latitude, report.longitude)
+        
+        if closest_report:
+            print(closest_report.latitude, closest_report.longitude)
 
 
 
-        # reports = Report.query.all()
         print(f"Previous reports: {reports}")
 
     return redirect("/find") 

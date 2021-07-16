@@ -94,6 +94,7 @@ var lon = 0;
 </script>
 {% endif %}
 {% endfor %}
+{% endif %}
 {% if closest_report != None and closest_report.latitude != None and closest_report.longitude != None %}
 <div class="buffer"></div>
 <h2 class="heading">Can't Find Outages in Your Area?</h2>
@@ -121,13 +122,11 @@ var closeLon = 0;
   closeLon = {{ closest_report.longitude|tojson }}
 
   // Create marker with coordinates
-  L.marker([lat, lon]).addTo(closeMap);
+  L.marker([closeLat, closeLon]).addTo(closeMap);
 
   // Pan to coordinates
   closeMap.panTo(new L.LatLng(closeLat, closeLon));
 </script>
-{% endif %}
-
 {% endif %}
 <div class="buffer"></div>
 {% endblock %}
